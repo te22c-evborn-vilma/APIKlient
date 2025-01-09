@@ -12,6 +12,6 @@ Digimon d = response.Content.ReadFromJsonAsync<Digimon>().Result;
 
 // File.WriteAllText("digi.json", digi);
 
-Console.WriteLine(d.name);
+Console.WriteLine($"Name: {d.name} || ID: {d.id}");
 
 Console.ReadLine();
