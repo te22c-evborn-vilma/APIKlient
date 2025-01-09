@@ -1,21 +1,17 @@
 ﻿using System.Net.Http.Json;
-using System.Text.Json;
-using System.Xml.XPath;
+// using System.Text.Json;
+// using System.Xml.XPath;
 
 HttpClient client = new();
+client.BaseAddress = new("https://digi-api.com/api/v1/digimon/");
+HttpResponseMessage response = client.GetAsync("29/").Result;
 
-client.BaseAddress = new("https://pokeapi.co/api/v2/"); //hämtar info
+Digimon d = response.Content.ReadFromJsonAsync<Digimon>().Result;
+// string digi = response.Content.ReadAsStringAsync().Result;
+// Digimon d = JsonSerializer.Deserialize<Digimon>(response.Content.ReadAsStringAsync().Result);
 
-HttpResponseMessage response = client.GetAsync("pokemon/snorlax").Result;
+// File.WriteAllText("digi.json", digi);
 
-string snorlax = response.Content.ReadAsStringAsync().Result;
-
-Pokemon p = JsonSerializer.Deserialize<Pokemon>(snorlax); //från text till objekt
-
-// slippa två rader över här
-// Pokemon p = response.Content.ReadFromJsonAsync<Pokemon>.Result;
-
-Console.WriteLine(p.weight);
-// File.WriteAllText("snorlax.json", snorlax); //skapa json fil
+Console.WriteLine(d.name);
 
 Console.ReadLine();
